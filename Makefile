@@ -1,5 +1,5 @@
 TARGET_DIR=./fs/
-HOSTNAME=lophilo
+HOSTNAME=openfpgaduino
 DEFAULT_SERIAL_CONSOLE=ttyS0 # as per tabbyrev2
 DEFAULT_SERIAL_CONSOLE_MAJOR=4
 DEFAULT_SERIAL_CONSOLE_MINOR=64
@@ -11,6 +11,9 @@ APT_SOURCE:=ftp://ftp.cn.debian.org/debian
 
 all: setup
 	echo "debootstrap to ${TARGET_DIR}"
+
+clean:
+	rm -rf TARGET_DIR
 
 #
 # initial image creation from the host system

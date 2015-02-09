@@ -13,7 +13,7 @@ all: setup
 	echo "debootstrap to ${TARGET_DIR}"
 
 clean:
-	rm -rf TARGET_DIR
+	sudo rm -rf ${TARGET_DIR}
 
 #
 # initial image creation from the host system
@@ -22,10 +22,10 @@ clean:
 ${TARGET_DIR}:
 	mkdir -p ${TARGET_DIR}
 
-/usr/bin/debootstrap:
-	sudo apt-get install debootstrap
+/usr/sbin/debootstrap:
+	yes | sudo apt-get install debootstrap
 
-${TARGET_DIR}/debootstrap/debootstrap: ${TARGET_DIR} /usr/bin/debootstrap
+${TARGET_DIR}/debootstrap/debootstrap: ${TARGET_DIR} /usr/sbin/debootstrap
 	sudo debootstrap --arch=armel --foreign wheezy ${TARGET_DIR} ${APT_SOURCE}
 	@echo "Modify /etc/exports to export ${TARGET_DIR} if you want to use NFSROOT"
 

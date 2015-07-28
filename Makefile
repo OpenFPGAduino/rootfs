@@ -5,7 +5,8 @@ DEFAULT_SERIAL_CONSOLE_MAJOR=4
 DEFAULT_SERIAL_CONSOLE_MINOR=64
 DEFAULT_SERIAL_CONSOLE_TARGET:=${TARGET_DIR}/dev/${DEFAULT_SERIAL_CONSOLE}
 STAGE1_INDICATOR:=${TARGET_DIR}/debootstrap/debootstrap
-APT_SOURCE:=ftp://ftp.cn.debian.org/debian
+#APT_SOURCE:=ftp://ftp.cn.debian.org/debian
+APT_SOURCE:=ftp://202.141.160.110/debian
 
 .PHONY: setup
 

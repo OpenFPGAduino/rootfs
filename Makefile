@@ -23,7 +23,10 @@ ${TARGET_DIR}:
 	mkdir -p ${TARGET_DIR}
 
 /usr/sbin/debootstrap:
-	yes | sudo apt-get install debootstrap
+	sudo apt-get -y install debootstrap
+
+/usr/bin/qemu-arm-static:
+	sudo apt-get -y install qemu
 
 ${TARGET_DIR}/debootstrap/debootstrap: ${TARGET_DIR} /usr/sbin/debootstrap
 	sudo debootstrap --arch=armel --foreign wheezy ${TARGET_DIR} ${APT_SOURCE}
@@ -41,9 +44,10 @@ ${TARGET_DIR}/dpkg-get-selections: dpkg-get-selections
 	sudo cp dpkg-get-selections $@
 
 setup: ${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/securetty ${TARGET_DIR}/etc/inittab ${TARGET_DIR}/firstboot.sh ${TARGET_DIR}/dpkg-get-selections
-	@echo "Boot to init=/bin/sh using the real device"
+	@echo "Boot to fs using qemu"
 	@echo "run /debootstrap/debootstrap --second-stage"
-	@echo "Please set root password on target system"
+	#@echo "Please set root password on target system"
+	cd fs; ./firstboot.sh
 
 ${TARGET_DIR}/etc/fstab: ${STAGE1_INDICATOR}
 	@echo "Setting up /proc for $@"

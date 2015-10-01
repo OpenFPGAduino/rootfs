@@ -279,8 +279,6 @@ node-semver					install
 node-tar					install
 node-underscore.logger				install
 node-which					install
-nodejs						install
-nodejs-dev					install
 npm						install
 ntpdate						install
 openssh-client					install

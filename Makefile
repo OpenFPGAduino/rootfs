@@ -48,7 +48,10 @@ setup: ${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/secu
 	@echo "Boot to fs using qemu"
 	@echo "run /debootstrap/debootstrap --second-stage"
 	#@echo "Please set root password on target system"
-	cd fs; ./firstboot.sh
+	cp /usr/bin/qemu-arm-static fs/usr/bin	
+	cp ./sources.list fs/etc/apt
+	./secondstage.sh
+	sudo rm -rf fs/dev
 
 ${TARGET_DIR}/etc/fstab: ${STAGE1_INDICATOR}
 	@echo "Setting up /proc for $@"

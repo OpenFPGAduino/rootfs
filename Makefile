@@ -29,8 +29,8 @@ ${TARGET_DIR}:
 /usr/bin/qemu-arm-static:
 	sudo apt-get -y install qemu
 
-${TARGET_DIR}/debootstrap/debootstrap: ${TARGET_DIR} /usr/sbin/debootstrap
-	sudo debootstrap --arch=armel --foreign wheezy ${TARGET_DIR} ${APT_SOURCE}
+${TARGET_DIR}/bin: ${TARGET_DIR} /usr/sbin/debootstrap
+	sudo debootstrap --arch=armel --foreign jessie ${TARGET_DIR} ${APT_SOURCE}
 	@echo "Modify /etc/exports to export ${TARGET_DIR} if you want to use NFSROOT"
 
 #
@@ -47,11 +47,11 @@ ${TARGET_DIR}/dpkg-get-selections: dpkg-get-selections
 setup: ${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/securetty ${TARGET_DIR}/etc/inittab ${TARGET_DIR}/firstboot.sh ${TARGET_DIR}/dpkg-get-selections
 	@echo "Boot to fs using qemu"
 	@echo "run /debootstrap/debootstrap --second-stage"
-	#@echo "Please set root password on target system"
-	cp /usr/bin/qemu-arm-static fs/usr/bin	
-	cp ./sources.list fs/etc/apt
-	./secondstage.sh
-	sudo rm -rf fs/dev
+	sudo cp /usr/bin/qemu-arm-static fs/usr/bin	
+	sudo cp ./sources.list fs/etc/apt
+	sudo ./secondstage.sh
+	rm fs/firstboot.sh
+	rm dpkg-get-selections
 
 ${TARGET_DIR}/etc/fstab: ${STAGE1_INDICATOR}
 	@echo "Setting up /proc for $@"

@@ -50,8 +50,8 @@ setup: ${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/secu
 	sudo cp /usr/bin/qemu-arm-static fs/usr/bin	
 	sudo cp ./sources.list fs/etc/apt
 	sudo ./secondstage.sh
-	sudo rm -rf fs/firstboot.sh
-	sudo rm -rf fs/dpkg-get-selections
+	#sudo rm -rf fs/firstboot.sh
+	#sudo rm -rf fs/dpkg-get-selections
 
 ${TARGET_DIR}/etc/fstab: ${STAGE1_INDICATOR}
 	@echo "Setting up /proc for $@"

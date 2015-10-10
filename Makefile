@@ -22,6 +22,7 @@ clean:
 
 ${TARGET_DIR}:
 	mkdir -p ${TARGET_DIR}
+	sudo debootstrap --arch=armel --foreign jessie ${TARGET_DIR} ${APT_SOURCE}
 
 /usr/sbin/debootstrap:
 	sudo apt-get -y install debootstrap
@@ -29,8 +30,7 @@ ${TARGET_DIR}:
 /usr/bin/qemu-arm-static:
 	sudo apt-get -y install qemu
 
-${TARGET_DIR}/bin: ${TARGET_DIR} /usr/sbin/debootstrap
-	sudo debootstrap --arch=armel --foreign jessie ${TARGET_DIR} ${APT_SOURCE}
+${TARGET_DIR}/debootstrap/debootstrap: ${TARGET_DIR} /usr/sbin/debootstrap 
 	@echo "Modify /etc/exports to export ${TARGET_DIR} if you want to use NFSROOT"
 
 #
@@ -50,8 +50,8 @@ setup: ${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/secu
 	sudo cp /usr/bin/qemu-arm-static fs/usr/bin	
 	sudo cp ./sources.list fs/etc/apt
 	sudo ./secondstage.sh
-	rm fs/firstboot.sh
-	rm dpkg-get-selections
+	sudo rm -rf fs/firstboot.sh
+	sudo rm -rf dpkg-get-selections
 
 ${TARGET_DIR}/etc/fstab: ${STAGE1_INDICATOR}
 	@echo "Setting up /proc for $@"

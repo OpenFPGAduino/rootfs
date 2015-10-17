@@ -41,18 +41,13 @@ ${TARGET_DIR}/firstboot.sh: firstboot.sh
 	sudo cp firstboot.sh $@
 	sudo chmod a+rx $@
 
-${TARGET_DIR}/dpkg-get-selections: dpkg-get-selections
-	sudo cp dpkg-get-selections $@
-
-setup: ${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/securetty ${TARGET_DIR}/etc/inittab ${TARGET_DIR}/firstboot.sh ${TARGET_DIR}/dpkg-get-selections
+setup: ${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/securetty ${TARGET_DIR}/etc/inittab ${TARGET_DIR}/firstboot.sh 
 	@echo "Boot to fs using qemu"
 	@echo "run /debootstrap/debootstrap --second-stage"
 	sudo cp /usr/bin/qemu-arm-static fs/usr/bin	
 	./secondstage.sh
 	sudo cp ./sources.list fs/etc/apt
 	sudo chroot fs ./firstboot.sh 
-	#sudo rm -rf fs/firstboot.sh
-	#sudo rm -rf fs/dpkg-get-selections
 
 ${TARGET_DIR}/etc/fstab: ${STAGE1_INDICATOR}
 	@echo "Setting up /proc for $@"

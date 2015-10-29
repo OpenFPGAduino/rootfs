@@ -28,7 +28,7 @@ ${TARGET_DIR}:
 	sudo apt-get -y install debootstrap
 
 /usr/bin/qemu-arm-static:
-	sudo apt-get -y install qemu
+	sudo apt-get -y install qemu-user-static
 
 ${TARGET_DIR}/debootstrap/debootstrap: ${TARGET_DIR} /usr/sbin/debootstrap 
 	@echo "Modify /etc/exports to export ${TARGET_DIR} if you want to use NFSROOT"

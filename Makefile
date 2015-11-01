@@ -41,6 +41,9 @@ ${TARGET_DIR}/firstboot.sh: firstboot.sh
 	sudo cp firstboot.sh $@
 	sudo chmod a+rx $@
 
+stage_one_only:${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/securetty ${TARGET_DIR}/etc/inittab ${TARGET_DIR}/firstboot.sh 
+	@echo "Stage one only finish"
+
 setup: ${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/securetty ${TARGET_DIR}/etc/inittab ${TARGET_DIR}/firstboot.sh 
 	@echo "Boot to fs using qemu"
 	@echo "run /debootstrap/debootstrap --second-stage"

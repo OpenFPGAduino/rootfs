@@ -1,3 +1,5 @@
+mount devpts /dev/pts -t devpts
+mount proc /proc -t proc
 useradd -g root -d /home/openfpgaduino -s /bin/bash -m openfpgaduino
 adduser openfpgaduino sudo
 passwd openfpgaduino << PSWD     

@@ -15,3 +15,5 @@ echo 'nameserver   8.8.8.8' >> /etc/resolv.conf
 chmod u+s /bin/ping
 apt-get update
 apt-get -y install gcc gdb dbus ssh sudo
+umount /devpts
+umount /proc

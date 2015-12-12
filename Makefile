@@ -47,6 +47,7 @@ setup: ${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/secu
 	sudo cp /usr/bin/qemu-arm-static fs/usr/bin	
 	./secondstage.sh
 	sudo cp ./sources.list fs/etc/apt
+	sudo cp ./fstab        fs/etc/
 	sudo chroot fs ./firstboot.sh 
 
 ${TARGET_DIR}/etc/fstab: ${STAGE1_INDICATOR}

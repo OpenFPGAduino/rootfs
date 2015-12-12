@@ -1,0 +1,13 @@
+# /etc/fstab: static file system information.
+#
+# <file system> <mount point>   <type>  <options>       		<dump>  <pass>
+tmpfs          	/tmp            tmpfs   size=512M,noatime  		0       0
+tmpfs          	/var/run        tmpfs   size=64M,noatime  		0       0
+tmpfs          	/var/lock       tmpfs   size=64M,noatime  		0       0
+proc          	/proc           proc   	defaults          		0       0
+devpts        	/dev/pts        devpts  defaults          		0       0
+/dev/mmcblk0p1 	/media/BOOT     vfat    noauto,noatime,errors=remount-ro,comment=systemd.automount 	0 	1
+/dev/mmcblk0p2 	/media/os       ext4    noauto,noatime,errors=remount-ro,comment=systemd.automount	0 	1
+/dev/mmcblk0p3 	swap            swap    sw 						0 		0
+sysfs           /sys            	sysfs   defaults            0 		0
+debugfs         /sys/kernel/debug   debugfs defaults            0 		0

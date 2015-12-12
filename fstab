@@ -3,5 +3,5 @@
 # <file system> <mount point>   <type>  <options>       		<dump>  <pass>
 proc          	/proc           proc   	defaults          		0       0
 /dev/mmcblk0p1 	/media/BOOT     vfat    noauto,noatime,errors=remount-ro,comment=systemd.automount 	0 	1
-/dev/mmcblk0p2 	/media/os       ext4    noauto,noatime,errors=remount-ro,comment=systemd.automount	0 	1
+/dev/mmcblk0p2 	/media/os       ext3    noauto,noatime,errors=remount-ro,comment=systemd.automount	0 	1
 /dev/mmcblk0p3 	swap            swap    sw 						0 		0

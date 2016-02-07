@@ -47,7 +47,9 @@ stage_one_only:${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/
 setup: ${TARGET_DIR}/etc/fstab ${TARGET_DIR}/etc/hostname ${TARGET_DIR}/etc/securetty ${TARGET_DIR}/etc/inittab ${TARGET_DIR}/firstboot.sh 
 	@echo "Boot to fs using qemu"
 	@echo "run /debootstrap/debootstrap --second-stage"
-	sudo cp /usr/bin/qemu-arm-static fs/usr/bin	
+	sudo cp /usr/bin/qemu-arm-static fs/usr/bin
+	mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
+	update-binfmts --enable qemu-arm	
 	./secondstage.sh
 	sudo cp ./sources.list fs/etc/apt
 	sudo cp ./fstab        fs/etc/
